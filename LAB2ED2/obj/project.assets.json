@@ -11843,11 +11843,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Edgar\\source\\repos\\LAB2ED2\\LAB2ED2\\LAB2ED2.csproj",
+      "projectUniqueName": "C:\\Users\\Edgar\\Desktop\\Nueva carpeta\\LAB2ED2\\LAB2ED2.csproj",
       "projectName": "LAB2ED2",
-      "projectPath": "C:\\Users\\Edgar\\source\\repos\\LAB2ED2\\LAB2ED2\\LAB2ED2.csproj",
+      "projectPath": "C:\\Users\\Edgar\\Desktop\\Nueva carpeta\\LAB2ED2\\LAB2ED2.csproj",
       "packagesPath": "C:\\Users\\Edgar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Edgar\\source\\repos\\LAB2ED2\\LAB2ED2\\obj\\",
+      "outputPath": "C:\\Users\\Edgar\\Desktop\\Nueva carpeta\\LAB2ED2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
