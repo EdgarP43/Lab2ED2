@@ -40,5 +40,36 @@ namespace LAB2ED2.Controllers
             }
             return encontrado;
         }
+
+        // POST api/GradoArbol
+        [Route("GradoArbol")]
+        [HttpPost]
+        public void PostGrado([FromBody] int grado)
+        {
+            Arbol_BEstrella Arbol1 = new Arbol_BEstrella(grado);
+            Arbol = Arbol1;
+        }
+
+        [Route("Valores")]
+        [HttpPost]
+        public void PostDatos([FromBody] Soda valor)
+        {
+            Arbol.Insertar(valor);
+        }
+
+        [Route("ArchivoYAarbol")]
+        [HttpGet]
+        public void GetArchivo()
+        {
+            var lector = new FileStream("Tabla.txt", FileMode.OpenOrCreate);
+            lector.Close();
+            var lee = new StreamReader(@"Tabla.txt");
+            lee.ReadLine();
+            while (!lee.EndOfStream)
+            {
+                var a = lee.ReadLine();
+                Arbol.InsertNodo(a, @"Tabla.txt");
+            }
+        }
     }
 }
