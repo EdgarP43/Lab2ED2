@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 using LAB2ED2.Modelos;
 
 namespace LAB2ED2.Arbol
@@ -10,6 +11,7 @@ namespace LAB2ED2.Arbol
     {
         private Nodo raiz;
         private int tamanioMax;
+        public List<Soda> contenidoArbol = new List<Soda>();
         public Arbol_BEstrella(int tamanioMax)
         {
             if (tamanioMax < 5)

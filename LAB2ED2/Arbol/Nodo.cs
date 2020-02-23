@@ -17,6 +17,10 @@ namespace LAB2ED2.Arbol
         public bool estaLleno { get; set; }
         public int tamaño { get; set; }
         public bool esRaiz { get; set; }
+        public string lineaNodo { get; set; }
+        public int[] lineasHijos { get; set; }
+        // public string[] lineasDatos { get; set; 
+        public List<string> lineasDatos = new List<string>();
         public Nodo(int grado)
         {
             gradoMaximo = grado;
