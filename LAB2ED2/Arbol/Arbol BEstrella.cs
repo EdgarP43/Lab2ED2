@@ -461,5 +461,80 @@ namespace LAB2ED2.Arbol
             }
             return Lista;
         }
+
+
+        //comienza lector de archivo para arbol
+
+        public string DevolverLinea(string lineaArchivo)
+        {
+            var lector = new StreamReader(@"Tabla.txt");
+            var array = lineaArchivo.ToCharArray();
+            var b = Convert.ToInt16(Convert.ToString(array[0]));
+            lector.ReadLine();
+            var cont = 0;
+            var linea = "";
+            while (cont < b)
+            {
+                linea = lector.ReadLine();
+                cont++;
+            }
+            return linea;
+        }
+
+        private Nodo LecRaiz;
+        public Nodo InsertNodo(string lineaALeer, string ruta)
+        {
+            LecRaiz = Leer(lineaALeer);
+            return LecRaiz;
+        }
+
+        private Nodo Leer(string lineaActual)
+        {
+            var DatosNodo = DevolverLinea(lineaActual);
+            var DatosNsep = DatosNodo.Split('|');
+            var DatosHijos = DatosNsep[2].Split(',');
+            var DatosLlaves = DatosNsep[3].Split(',');
+            var aux = new Nodo(tamanioMax);
+            if (Convert.ToInt16(DatosNsep[1]) != -1)
+            {
+                var actual = new Nodo(tamanioMax);
+                aux = actual;
+                for (int i = 0; i < tamanioMax; i++)
+                {
+                    actual.lineasDatos.Add(DatosLlaves[i]);
+                }
+            }
+            else
+            {
+                var actual = new Nodo(tamanioMax + 1);
+                aux = actual;
+                for (int i = 0; i < tamanioMax; i++)
+                {
+                    actual.lineasDatos.Add(DatosLlaves[i]);
+                }
+            }
+            if (Convert.ToInt16(DatosHijos[0]) != -1)
+            {
+                var cont = 0;
+                while (cont < tamanioMax + 1)
+                {
+                    if (Convert.ToInt16(DatosHijos[cont]) != -1)
+                    {
+                        aux.hijos[cont] = Leer(DatosHijos[cont]);
+                    }
+                    else
+                    {
+                        return aux;
+                    }
+                    cont++;
+                }
+            }
+            else
+            {
+                return aux;
+            }
+            return aux;
+        }
+
     }
 }
