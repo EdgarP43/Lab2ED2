@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using LAB2ED2.Arbol;
+using System.IO;
+using LAB2ED2.Modelos;
 
 namespace LAB2ED2.Controllers
 {
@@ -10,36 +13,63 @@ namespace LAB2ED2.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public Arbol_BEstrella Arbol = new Arbol_BEstrella(5);
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public string Get()
         {
-            return new string[] { "value1", "value2" };
+            var contenido = "Para buscar elementos ingrese la extension /BusquedaBebidas e ingresar el valor buscado en Postman \n" + Arbol.Todo();
+            return contenido;
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [Route("BusquedaBebidas")]
+        [HttpGet]
+        public string Get([FromBody] string nuevo)
         {
-            return "value";
+            var valorBuscado = Arbol.Busqueda(nuevo);
+            string encontrado;
+            if (valorBuscado != null)
+            {
+                encontrado = "-------------\n" + "Nombre: " + valorBuscado.nombre + "\n" + "Sabor: " + valorBuscado.sabor + "\n" + "Volumen: " + valorBuscado.volumen + "\n" + "Precio: " + valorBuscado.precio + "Casa productora: " + valorBuscado.casaProductora + "\n" + "-----------------\n";
+
+            }
+            else
+            {
+                encontrado = "Valor no encontrado";
+            }
+            return encontrado;
         }
 
-        // POST api/values
+        // POST api/GradoArbol
+        [Route("GradoArbol")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void PostGrado([FromBody] int grado)
         {
+            Arbol_BEstrella Arbol1 = new Arbol_BEstrella(grado);
+            Arbol = Arbol1;
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [Route("Valores")]
+        [HttpPost]
+        public void PostDatos([FromBody] Soda valor)
         {
+            Arbol.Insertar(valor);
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Route("ArchivoYAarbol")]
+        [HttpGet]
+        public void GetArchivo()
         {
+            var lector = new FileStream("Tabla.txt", FileMode.OpenOrCreate);
+            lector.Close();
+            var lee = new StreamReader(@"Tabla.txt");
+            lee.ReadLine();
+            while (!lee.EndOfStream)
+            {
+                var a = lee.ReadLine();
+                Arbol.InsertNodo(a, @"Tabla.txt");
+            }
         }
     }
 }
